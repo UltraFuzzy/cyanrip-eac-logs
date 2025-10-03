@@ -1,0 +1,43 @@
+name: Compare Cue and Log Files
+
+on:
+  push:
+    branches: [ $default-branch ]
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f scripts/requirements.txt ]; then pip install -r scripts/requirements.txt; fi
+      - name: Compare Log Files
+        run: |
+          date >> generated.txt
+          pwd >> generated.txt
+          for d in logs/*; do
+            if [ -e "$d"/eac.log ]; then
+              ./scripts/compare_log.py "$d"/eac.log "$d"/cyanrip.log > "$d"/eac_vs_cyanrip.txt
+            fi
+            if [ -e "$d"/xld.log ]; then
+              ./scripts/compare_log.py "$d"/xld.log "$d"/cyanrip.log > "$d"/xld_vs_cyanrip.txt
+            fi
+          done
+      # - name: Compare Cue Files
+      #   run: |
+      #     ls * >> generated.txt
+      - name: Write Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logs
+          git commit -m "generated"
+          git push
