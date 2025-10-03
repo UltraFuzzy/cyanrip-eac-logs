@@ -1,0 +1,45 @@
+name: Compare Cue and Log Files
+on: push
+# on:
+#   push:
+#     branches: [ $default-branch ]
+permissions:
+  contents: write
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f scripts/requirements.txt ]; then
+            pip install -r scripts/requirements.txt
+          fi
+      - name: Generate cyanrip vs EAC/XLD Log File Comparisons
+        run: ./scripts/generate-log-comparisons.sh
+      - name: Generate cyanrip vs EAC Cue File Comparisons
+        run: ./scripts/generate-cue-comparisons.sh
+      - name: Write Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # TODO/WARN: All comparisons get generated anew every time and we
+          # just rely on the behavior of git add to recognize when re-generated
+          # comparison report files are identical. If something like a date was
+          # ever added to the comparison reports then this would become a
+          # problem.
+          #
+          # Use force add because the *_{log,cue}.txt files are in the
+          # .gitignore to prevent users from committing them or being bothered
+          # by git about them. They should only get committed here.
+          for f in logs/*/*_{log,cue}.txt; do
+            git add -f "$f"
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m "automated cue+log comparison"
+            git push
+          fi

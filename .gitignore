@@ -1,0 +1,4 @@
+__pycache__/
+.mypy_cache/
+logs/**/*_log.txt
+logs/**/*_cue.txt

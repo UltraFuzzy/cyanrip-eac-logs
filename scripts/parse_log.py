@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
-
 import re
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Literal, Optional
+from types import SimpleNamespace
 
+# EAC log and cue files use old Windows encodings.
 import chardet
 
 
@@ -22,16 +22,20 @@ class Track:
 
 @dataclass
 class Log:
-    ripper:  Literal['EAC', 'XLD', 'cyanrip']
-    version: str
-    drive:   Optional[str]
-    tracks:  List[Track]
+    file_path:      str
+    ripper:         Literal['EAC', 'XLD', 'cyanrip']
+    ripper_version: str
+    drive:          Optional[str]
+    read_offset:    int
+    tracks:         List[Track]
 
 
-def parse_eac_log(file_path):
+def parse_log_eac(file_path):
     # Exact Audio Copy V1.8 from 15. July 2024
     # [...]
     # Used drive  : HL-DT-STBD-RE BU40N   Adapter: 1  ID: 1
+    # [...]
+    # Read offset correction                      : 6
     # [...]
     # TOC of the extracted CD
     #
@@ -68,12 +72,15 @@ def parse_eac_log(file_path):
     # version_num_str  = ms[2]
     # version_date_str = ms[3]
     ripper = "EAC"
-    version = version_full_str
+    ripper_version = version_full_str
 
     i = 1
     while not re.match(r"Used\s+drive\s+:", lines[i]):
         i += 1
     drive = re.match(r"Used\s+drive\s+:\s+(.*\S)\s+Adapter", lines[i])[1]
+    while not re.match(r"Read offset correction\s+:", lines[i]):
+        i += 1
+    read_offset = int(re.match(r"Read offset correction\s+:\s+([+-]?\d+)", lines[i])[1])
 
     track_sectors = []
     while not lines[i].startswith("TOC of the extracted CD"):
@@ -90,13 +97,11 @@ def parse_eac_log(file_path):
 
     tracks = []
     while True:
-        done = False
         while not re.match(r"Track\s+\d+", lines[i]):
             i += 1
             if i == len(lines):
-                done = True
                 break
-        if done:
+        if i == len(lines):
             break
         track_number = int(re.match(r"Track\s+(\d+)", lines[i])[1])
         while not re.match(r"\s+Pre-gap\s+length", lines[i]) and not re.match(r"\s+Peak\s+level", lines[i]):
@@ -107,8 +112,6 @@ def parse_eac_log(file_path):
             ms = re.match(r"\s+Pre-gap\s+length\s+(\d+):(\d+):(\d+\.\d*)", lines[i])
             track_pregap_duration = 3600*float(ms[1]) + 60*float(ms[2]) + float(ms[3])
             # track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
-            print(lines[i].strip())
-            print(track_pregap_duration)
         while not re.match(r"\s+Peak\s+level", lines[i]):
             i += 1
         track_peak = re.match(r"\s+Peak\s+level\s+(\d+\.\d+)", lines[i])[1]
@@ -129,17 +132,21 @@ def parse_eac_log(file_path):
             ))
 
     return Log(
-            ripper = ripper,
-            version = version,
-            drive = drive,
-            tracks = tracks
+            file_path      = file_path,
+            ripper         = ripper,
+            ripper_version = ripper_version,
+            read_offset    = read_offset,
+            drive          = drive,
+            tracks         = tracks,
         )
 
 
-def parse_xld_log(file_path):
+def parse_log_xld(file_path):
     # X Lossless Decoder version 20250302 (157.2)
     # [...]
     # Used drive : HL-DT-ST BD-RE BU40N (revision 1.00)
+    # [...]
+    # Read offset correction  : 6
     # [...]
     # TOC of the extracted CD
     #      Track |   Start  |  Length  | Start sector | End sector 
@@ -179,12 +186,15 @@ def parse_xld_log(file_path):
     # version_num_str  = ms[2]
     # version_date_str = ms[3]
     ripper = "XLD"
-    version = version_full_str
+    ripper_version = version_full_str
 
     i = 1
     while not re.match(r"Used\s+drive\s+:", lines[i]):
         i += 1
     drive = re.match(r"Used\s+drive\s+:\s+(.*\S)\s+\(revision", lines[i])[1]
+    while not re.match(r"Read offset correction\s+:", lines[i]):
+        i += 1
+    read_offset = int(re.match(r"Read offset correction\s+:\s+([+-]?\d+)", lines[i])[1])
 
     track_sectors = []
     while not lines[i].startswith("TOC of the extracted CD"):
@@ -201,13 +211,11 @@ def parse_xld_log(file_path):
 
     tracks = []
     while True:
-        done = False
         while not re.match(r"Track\s+\d+", lines[i]):
             i += 1
             if i == len(lines):
-                done = True
                 break
-        if done:
+        if i == len(lines):
             break
         track_number = int(re.match(r"Track\s+(\d+)", lines[i])[1])
         while not re.match(r"\s+Pre-gap\s+length\s+:", lines[i]) and not re.match(r"\s+Peak\s+:", lines[i]):
@@ -245,16 +253,20 @@ def parse_xld_log(file_path):
             ))
 
     return Log(
-            ripper = ripper,
-            version = version,
-            drive = drive,
-            tracks = tracks
+            file_path      = file_path,
+            ripper         = ripper,
+            ripper_version = ripper_version,
+            read_offset    = read_offset,
+            drive          = drive,
+            tracks         = tracks
         )
 
 
-def parse_cyanrip_log(file_path):
+def parse_log_cyanrip(file_path):
     # cyanrip 0.9.3.1-uf0.5 (c194065)
     # Drive used:     HL-DT-ST BD-RE BU40N (revision 1.00)
+    # [...]
+    # Offset:         +6 samples
     # [...]
     # Tracks:
     # Track 1 ripped and encoded successfully!
@@ -281,25 +293,28 @@ def parse_cyanrip_log(file_path):
     # version_num_str    = ms[2]
     # version_commit_str = ms[3]
     ripper = "cyanrip"
-    version = version_full_str
+    ripper_version = version_full_str
 
     i = 1
-    while not lines[i].startswith("Drive used:") and not lines[i].startswith("Tracks:"):
+    # "Drive used:" not present in logs from old cyanrip versions
+    while not lines[i].startswith("Drive used:") and not lines[i].startswith("Offset:"):
         i += 1
     if not lines[i].startswith("Drive used:"):
         drive = None
     else:
         drive = re.match(r"Drive used:\s+(\S.*\S)\s+\(revision", lines[i])[1]
 
+    while not lines[i].startswith("Offset:"):
+        i += 1
+    read_offset = int(re.match(r"Offset:\s+([+-]?\d+)", lines[i])[1])
+
     tracks = []
     while i < len(lines):
-        done = False
         while not re.match(r"Track\s+\d+", lines[i]):
             i += 1
             if i == len(lines):
-                done = True
                 break
-        if done:
+        if i == len(lines):
             break
         track_number = int(re.match(r"Track\s(\d+)", lines[i])[1])
 
@@ -354,31 +369,21 @@ def parse_cyanrip_log(file_path):
             ))
 
     return Log(
-            ripper = ripper,
-            version = version,
-            drive = drive,
-            tracks = tracks
+            file_path      = file_path,
+            ripper         = ripper,
+            ripper_version = ripper_version,
+            read_offset    = read_offset,
+            drive          = drive,
+            tracks         = tracks,
         )
 
 
 def parse_log(file_path):
-    print()
-    log = None
-    if log is None:
+    for parse_fn in (parse_log_eac, parse_log_xld, parse_log_cyanrip):
         try:
-            log = parse_eac_log(file_path)
-        except (UnicodeDecodeError, ValueError) as e:
+            return parse_fn(file_path)
+        except ValueError:
             pass
-    if log is None:
-        try:
-            log = parse_xld_log(file_path)
-        except (UnicodeDecodeError, ValueError):
-            pass
-    if log is None:
-        try:
-            log =  parse_cyanrip_log(file_path)
-        except (UnicodeDecodeError, ValueError):
-            pass
-    if log is None:
-        raise ValueError
-    return log
+        # any other exception type is likely due to errors in this script
+        # itself so don't attempt to catch or handle them
+    raise ValueError(f'Unable to parse log file "{file_path}"')

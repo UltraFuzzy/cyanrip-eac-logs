@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
-
 import sys
 import re
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional, Tuple
 
+# EAC log and cue files use old Windows encodings.
 import chardet
 
 
@@ -14,25 +13,47 @@ class MSF:
     second: int
     frame:  int
 
+    def __str__(self):
+        return f"{self.minute:02}:{self.second:02}:{self.frame:02}"
+
 
 @dataclass
 class TrackFile:
     name: str
     main_track_number: Optional[int] = field(default=None)
+    tracks:            List['Track'] = field(default_factory=list)
+
+    def __eq__(self, other):
+        if not isinstance(other, TrackFile):
+            raise NotImplementedError
+        return self.main_track_number == other.main_track_number
+
+    def __str__(self):
+        return f"File for track {self.main_track_number}"
+
+
+@dataclass
+class Index:
+    file: TrackFile
+    msf:  MSF
+
+    def __str__(self):
+        return f"{self.file}, {self.msf}"
 
 
 @dataclass
 class Track:
     number:    int
-    title:     Optional[str] = field(default=None)
-    performer: Optional[str] = field(default=None)
-    isrc:      Optional[str] = field(default=None)
-    index00:   Optional[Tuple[TrackFile, MSF]] = field(default=None)
-    index01:   Optional[Tuple[TrackFile, MSF]] = field(default=None)
+    title:     Optional[str]   = field(default=None)
+    performer: Optional[str]   = field(default=None)
+    isrc:      Optional[str]   = field(default=None)
+    index00:   Optional[Index] = field(default=None)
+    index01:   Optional[Index] = field(default=None)
 
 
 @dataclass
 class Cue:
+    file_path: str
     ripper:    Literal['EAC', 'XLD', 'cyanrip']
     ripper_version: Optional[str]
     lines:     List[str]
@@ -53,10 +74,18 @@ def is_xld_cue_heuristic(lines):
     return False
 
 skip_line_patterns = [
+    # entries that don't need to match
     r"REM GENRE",
     r"REM DATE",
 
-    # MusicBrainz stuff written by cyanrip
+    # EAC entries
+    r"FLAGS DCP",
+    r'REM COMPOSER ""',
+
+    # XLD ReplayGain entries
+    r"REM REPLAYGAIN_",
+
+    # cyanrip MusicBrainz-related entries
     r"REM MUSICBRAINZ",
     r"REM MEDIA_TYPE",
     r"REM RELEASE_ID",
@@ -72,12 +101,10 @@ skip_line_patterns = [
     # TODO cyanrip should write this as CATALOG
     r"MCN",
 
-    # leftover from fixed cyanrip log buf
+    # cyanrip line due to fixed bug
     r"PREGAP 00:00:00",
+    # cyanrip generates valid track 1 PREGAP entries
     r"PREGAP",
-
-    r"FLAGS DCP",
-    r"REM COMPOSER",
 ]
 
 def parse_cue(file_path):
@@ -112,7 +139,7 @@ def parse_cue(file_path):
         elif any(re.match(p, lines[i]) for p in skip_line_patterns):
             pass
         else:
-            print(f"WARN: Unparsed line: {lines[i]}", file=sys.stderr)
+            print(f"WARN: Unrecognized entry in cue file \"{file_path}\" line {i+1}: {lines[i]}", file=sys.stderr)
         i += 1
     if ripper is None and is_xld_cue_heuristic(lines):
         ripper = "XLD"
@@ -133,7 +160,7 @@ def parse_cue(file_path):
         elif lines[i].startswith("TRACK "):
             track_number = int(re.match(r"TRACK\s+(\d+)\s", lines[i])[1])
             if cur_track is not None and cur_track.number == track_number:
-                # print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} TRACK", file=sys.stderr)
+                print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} TRACK", file=sys.stderr)
                 pass
             else:
                 if cur_track is not None:
@@ -146,7 +173,7 @@ def parse_cue(file_path):
                 if cur_track.title != track_title:
                     print(f"ERROR: {file_path} has multiple entries for track {cur_track.number:02} TITLE and they differ", file=sys.stderr)
                 else:
-                    # print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} TITLE but they match", file=sys.stderr)
+                    print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} TITLE but they match", file=sys.stderr)
                     pass
             cur_track.title = track_title
 
@@ -156,7 +183,7 @@ def parse_cue(file_path):
                 if cur_track.performer != track_performer:
                     print(f"ERROR: {file_path} has multiple entries for track {cur_track.number:02} PERFORMER and they differ", file=sys.stderr)
                 else:
-                    # print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} PERFORMER but they match", file=sys.stderr)
+                    print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} PERFORMER but they match", file=sys.stderr)
                     pass
             cur_track.performer = track_performer
 
@@ -166,36 +193,37 @@ def parse_cue(file_path):
                 if cur_track.isrc != track_isrc:
                     print(f"ERROR: {file_path} has multiple entries for track {cur_track.number:02} ISRC and they differ", file=sys.stderr)
                 else:
-                    # print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} ISRC but they match", file=sys.stderr)
+                    print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} ISRC but they match", file=sys.stderr)
                     pass
             cur_track.isrc = track_isrc
 
         elif lines[i].startswith("INDEX 00 "):
             ms = re.match(r"INDEX 00 (\d+):(\d+):(\d+)", lines[i])
-            index00 = (cur_file, MSF(minute=ms[1], second=ms[2], frame=ms[3]))
+            index00 = Index(file=cur_file, msf=MSF(minute=ms[1], second=ms[2], frame=ms[3]))
             if cur_track.index00 is not None:
                 if cur_track.index00 != index00:
                     print(f"ERROR: {file_path} has multiple entries for track {cur_track.number:02} INDEX00 and they differ", file=sys.stderr)
                 else:
-                    # print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} INDEX00 but they match", file=sys.stderr)
+                    print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} INDEX00 but they match", file=sys.stderr)
                     pass
             cur_track.index00 = index00
 
         elif lines[i].startswith("INDEX 01 "):
             ms = re.match(r"INDEX 01 (\d+):(\d+):(\d+)", lines[i])
-            index01 = (cur_file, MSF(minute=ms[1], second=ms[2], frame=ms[3]))
+            index01 = Index(file=cur_file, msf=MSF(minute=ms[1], second=ms[2], frame=ms[3]))
             if cur_track.index01 is not None:
                 if cur_track.index01 != index01:
                     print(f"ERROR: {file_path} has multiple entries for track {cur_track.number:02} INDEX01 and they differ", file=sys.stderr)
                 else:
                     print(f"WARN: {file_path} has multiple entries for track {cur_track.number:02} INDEX01 but they match", file=sys.stderr)
             cur_track.index01 = index01
+            cur_file.main_track_number = cur_track.number
 
         elif any(re.match(p, lines[i]) for p in skip_line_patterns):
             pass
 
         else:
-            print(f"WARN: Unparsed line: {lines[i]}", file=sys.stderr)
+            print(f"WARN: Unrecognized entry in cue file \"{file_path}\" line {i+1}: {lines[i]}", file=sys.stderr)
 
         i += 1
 
@@ -206,14 +234,16 @@ def parse_cue(file_path):
         tracks.append(cur_track)
         cur_track = None
 
+    assert(ripper is not None)
     return Cue(
-            lines=lines,
-            files=files,
-            ripper=ripper,
+            file_path = file_path,
+            lines     = lines,
+            files     = files,
+            ripper    = ripper,
             ripper_version=ripper_version,
-            discid = discid,
-            catalog=catalog,
-            performer=performer,
-            title=title,
-            tracks=tracks,
+            discid    = discid,
+            catalog   = catalog,
+            performer = performer,
+            title     = title,
+            tracks    = tracks,
             )
