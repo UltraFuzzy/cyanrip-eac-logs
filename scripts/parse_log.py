@@ -1,5 +1,5 @@
 import re
-import math
+import codecs
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional
 from types import SimpleNamespace
@@ -61,9 +61,9 @@ def parse_log_eac(file_path):
     # [...]
     #      Peak level 96.6 %
     #      Copy CRC 64960678
-    # lines = open(file_path, mode='rt', encoding='utf-16-le').readlines()
-    encoding = chardet.detect(open(file_path, 'rb').read())['encoding']
-    lines = open(file_path, mode='rt', encoding=encoding).readlines()
+    file_bytes = open(file_path, 'rb').read()
+    encoding = chardet.detect(file_bytes)['encoding']
+    lines = codecs.decode(file_bytes, encoding).splitlines()
 
     ms = re.match("\uFEFF?" + r"Exact Audio Copy (V([\d\.]+)\s+from\s+(\d+\.?\s+[A-Za-z]+\s+\d+))", lines[0])
     if not ms:
@@ -174,10 +174,9 @@ def parse_log_xld(file_path):
     # [...]
     #     AccurateRip v1 signature : A4C817F9
     #     AccurateRip v2 signature : 8BD95123
-
-    # EAC log files tend to be UTF-16-LE with BOM.
-    encoding = chardet.detect(open(file_path, 'rb').read())['encoding']
-    lines = open(file_path, mode='rt', encoding=encoding).readlines()
+    file_bytes = open(file_path, 'rb').read()
+    encoding = chardet.detect(file_bytes)['encoding']
+    lines = codecs.decode(file_bytes, encoding).splitlines()
 
     ms = re.match(r"X Lossless Decoder version ((\d+)\s+\((.+)\))", lines[0])
     if not ms:
@@ -284,8 +283,10 @@ def parse_log_cyanrip(file_path):
     #   Accurip:       not found
     #     Accurip v1:  A4C817F9
     #     Accurip v2:  8BD95123
-    encoding = chardet.detect(open(file_path, 'rb').read())['encoding']
-    lines = open(file_path, mode='rt', encoding=encoding).readlines()
+    file_bytes = open(file_path, 'rb').read()
+    encoding = chardet.detect(file_bytes)['encoding']
+    lines = codecs.decode(file_bytes, encoding).splitlines()
+
     ms = re.match(r"cyanrip\s+(([\w\.-]+)\s+\((\w+)\))", lines[0])
     if not ms:
         raise ValueError

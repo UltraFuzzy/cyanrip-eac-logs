@@ -10,9 +10,12 @@ def compare_values(name, log1_val, log2_val, log1_ripper, log2_ripper):
     if log1_val == log2_val:
         print(f"✅ {name} matches")
     else:
+        log1_ripper = f"({log1_ripper})"
+        log2_ripper = f"({log2_ripper})"
+        ripper_str_width = max(len(log1_ripper), len(log2_ripper))
         print(f"❌ {name} differs")
-        print(f"   log 1 ({log1_ripper}): {log1_val}")
-        print(f"   log 2 ({log2_ripper}): {log2_val}")
+        print(f"   log 1 {log1_ripper:<{ripper_str_width}}: {log1_val}")
+        print(f"   log 2 {log2_ripper:<{ripper_str_width}}: {log2_val}")
 
 
 def compare_tracks(log1, log2, track_index):

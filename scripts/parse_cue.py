@@ -2,6 +2,7 @@ import sys
 import re
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional, Tuple
+import codecs
 
 # EAC log and cue files use old Windows encodings.
 import chardet
@@ -108,9 +109,9 @@ skip_line_patterns = [
 ]
 
 def parse_cue(file_path):
-    # EAC cue files tend to be Windows-1252.
-    encoding = chardet.detect(open(file_path, 'rb').read())['encoding']
-    lines = [l.strip() for l in open(file_path, mode='rt', encoding=encoding).readlines()]
+    file_bytes = open(file_path, 'rb').read()
+    encoding = chardet.detect(file_bytes)['encoding']
+    lines = [l.strip() for l in codecs.decode(file_bytes, encoding).splitlines()]
 
     ripper = None
     ripper_version = None
