@@ -43,7 +43,7 @@ def compare_tracks(log1, log2, track_index):
         either_has_pos_read_offset = log1.read_offset > 0 or log2.read_offset > 0
         if ((is_first_track and either_has_neg_read_offset)
                 or (is_last_track and either_has_pos_read_offset)):
-            print("   EAC CRC32 mismatch contributed to by dffering read offsets")
+            print("   EAC CRC32 mismatch contributed to by differing read offsets")
 
     both_have_accurate_rip = neither_eac
     if both_have_accurate_rip:
