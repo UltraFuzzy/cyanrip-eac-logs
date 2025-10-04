@@ -73,4 +73,4 @@ Comparing tracks[9]
 ❌ EAC CRC32 differs
    log 1 (cyanrip): 03230233
    log 2 (EAC): F7E29DF2
-   EAC CRC32 mismatch contributed to by dffering read offsets
+   EAC CRC32 mismatch contributed to by differing read offsets
