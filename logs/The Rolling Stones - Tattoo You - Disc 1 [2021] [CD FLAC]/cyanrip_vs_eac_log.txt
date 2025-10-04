@@ -9,7 +9,7 @@ Comparing tracks[0]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 0.0
-   log 2 (EAC): 2.0
+   log 2 (EAC)    : 2.0
 ✅ EAC CRC32 matches
 Comparing tracks[1]
 ✅ track number matches

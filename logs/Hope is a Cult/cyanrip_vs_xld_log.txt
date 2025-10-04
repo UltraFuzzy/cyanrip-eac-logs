@@ -26,7 +26,7 @@ Comparing tracks[2]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 0.506
-   log 2 (XLD): 0.38
+   log 2 (XLD)    : 0.38
 ✅ peak matches
 ✅ EAC CRC32 matches
 ✅ AccurateRip v1 matches
@@ -82,7 +82,7 @@ Comparing tracks[8]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 0.8
-   log 2 (XLD): 0.6
+   log 2 (XLD)    : 0.6
 ✅ peak matches
 ✅ EAC CRC32 matches
 ✅ AccurateRip v1 matches
