@@ -1,0 +1,44 @@
+Comparing cue files "cyanrip.cue" and "eac.cue"
+✅ DISCID matches
+Comparing tracks[0]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[1]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[2]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[3]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[4]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[5]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): File for track 5, 03:21:53
+   cue 2 (EAC)    : None
+✅ INDEX 01 matches
+Comparing tracks[6]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[7]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[8]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[9]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches

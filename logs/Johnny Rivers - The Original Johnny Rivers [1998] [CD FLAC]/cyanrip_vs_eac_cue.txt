@@ -1,0 +1,108 @@
+Comparing cue files "cyanrip.cue" and "eac.cue"
+✅ DISCID matches
+Comparing tracks[0]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[1]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 1, 03:45:18
+✅ INDEX 01 matches
+Comparing tracks[2]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 2, 02:30:12
+✅ INDEX 01 matches
+Comparing tracks[3]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 3, 02:39:33
+✅ INDEX 01 matches
+Comparing tracks[4]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 4, 03:04:49
+✅ INDEX 01 matches
+Comparing tracks[5]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 5, 02:48:29
+✅ INDEX 01 matches
+Comparing tracks[6]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 6, 03:17:48
+✅ INDEX 01 matches
+Comparing tracks[7]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 7, 02:56:45
+✅ INDEX 01 matches
+Comparing tracks[8]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 8, 02:14:09
+✅ INDEX 01 matches
+Comparing tracks[9]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 9, 02:29:16
+✅ INDEX 01 matches
+Comparing tracks[10]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 10, 02:30:02
+✅ INDEX 01 matches
+Comparing tracks[11]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 11, 03:15:60
+✅ INDEX 01 matches
+Comparing tracks[12]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 12, 03:13:01
+✅ INDEX 01 matches
+Comparing tracks[13]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 13, 03:00:11
+✅ INDEX 01 matches
+Comparing tracks[14]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 14, 03:49:20
+✅ INDEX 01 matches
+Comparing tracks[15]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 15, 02:53:21
+✅ INDEX 01 matches
+Comparing tracks[16]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 16, 03:09:15
+✅ INDEX 01 matches
+Comparing tracks[17]
+✅ track number matches
+❌ INDEX 00 differs
+   cue 1 (cyanrip): None
+   cue 2 (EAC)    : File for track 17, 02:50:26
+✅ INDEX 01 matches

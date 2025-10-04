@@ -1,0 +1,73 @@
+Comparing log files "cyanrip.log" and "eac.log"
+🟡 WARNING: Log "logs/Lukas Graham - Lukas Graham [2015] [CD FLAC]/cyanrip.log" lacks drive info.
+🟡 WARNING: Can't determine if same drive used for rips.
+✅ read offset matches
+✅ track count matches
+Comparing tracks[0]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 0.0
+   log 2 (EAC): 2.0
+✅ EAC CRC32 matches
+Comparing tracks[1]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[2]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[3]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[4]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[5]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[6]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[7]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[8]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[9]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches
+Comparing tracks[10]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ EAC CRC32 matches

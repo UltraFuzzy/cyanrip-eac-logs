@@ -1,0 +1,125 @@
+Comparing log files "cyanrip.log" and "xld.log"
+✅ drive used matches
+✅ read offset matches
+✅ track count matches
+Comparing tracks[0]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[1]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[2]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 0.506
+   log 2 (XLD): 0.38
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[3]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[4]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[5]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[6]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[7]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[8]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 0.8
+   log 2 (XLD): 0.6
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[9]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[10]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[11]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[12]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
