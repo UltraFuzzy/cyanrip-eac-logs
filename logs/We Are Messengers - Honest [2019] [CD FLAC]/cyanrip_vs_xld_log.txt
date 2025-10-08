@@ -1,0 +1,58 @@
+Comparing log files "cyanrip.log" and "xld.log"
+🟡 WARNING: Possibly different drives used for rips.
+✅ read offset matches
+✅ track count matches
+Comparing tracks[0]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[1]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[2]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[3]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[4]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[5]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches

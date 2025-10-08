@@ -42,7 +42,9 @@ Comparing tracks[4]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-✅ pregap duration matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.639
+   log 2 (XLD)    : 1.64
 ✅ peak matches
 ✅ EAC CRC32 matches
 ✅ AccurateRip v1 matches
@@ -111,6 +113,75 @@ Comparing tracks[11]
 ✅ AccurateRip v1 matches
 ✅ AccurateRip v2 matches
 Comparing tracks[12]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[13]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[14]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.36
+   log 2 (XLD)    : 1.359
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[15]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.879
+   log 2 (XLD)    : 1.88
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[16]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[17]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.879
+   log 2 (XLD)    : 1.88
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[18]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[19]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches

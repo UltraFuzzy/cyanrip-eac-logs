@@ -119,3 +119,48 @@ Comparing tracks[12]
 ✅ EAC CRC32 matches
 ✅ AccurateRip v1 matches
 ✅ AccurateRip v2 matches
+Comparing tracks[13]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[14]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[15]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[16]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches
+Comparing tracks[17]
+✅ track number matches
+✅ start sector matches
+✅ end sector matches
+✅ pregap duration matches
+✅ peak matches
+✅ EAC CRC32 matches
+✅ AccurateRip v1 matches
+✅ AccurateRip v2 matches

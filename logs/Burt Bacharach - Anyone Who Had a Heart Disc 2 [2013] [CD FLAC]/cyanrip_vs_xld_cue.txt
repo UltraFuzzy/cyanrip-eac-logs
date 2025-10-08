@@ -1,0 +1,82 @@
+Comparing cue files "cyanrip.cue" and "xld.cue"
+✅ DISCID matches
+Comparing tracks[0]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[1]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[2]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[3]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[4]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[5]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[6]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[7]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[8]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[9]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[10]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[11]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[12]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[13]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[14]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[15]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[16]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[17]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[18]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches
+Comparing tracks[19]
+✅ track number matches
+✅ INDEX 00 matches
+✅ INDEX 01 matches

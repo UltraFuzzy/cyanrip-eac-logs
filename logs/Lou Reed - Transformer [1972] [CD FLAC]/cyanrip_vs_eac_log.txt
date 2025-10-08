@@ -15,7 +15,9 @@ Comparing tracks[1]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-✅ pregap duration matches
+❌ pregap duration differs
+   log 1 (cyanrip): 2.4
+   log 2 (EAC)    : 2.533
 ✅ EAC CRC32 matches
 Comparing tracks[2]
 ✅ track number matches
@@ -23,13 +25,15 @@ Comparing tracks[2]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 2.093
-   log 2 (EAC)    : 2.09
+   log 2 (EAC)    : 2.12
 ✅ EAC CRC32 matches
 Comparing tracks[3]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-✅ pregap duration matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.8
+   log 2 (EAC)    : 2.066
 ✅ EAC CRC32 matches
 Comparing tracks[4]
 ✅ track number matches
@@ -41,21 +45,23 @@ Comparing tracks[5]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-✅ pregap duration matches
+❌ pregap duration differs
+   log 1 (cyanrip): 1.8
+   log 2 (EAC)    : 2.066
 ✅ EAC CRC32 matches
 Comparing tracks[6]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-❌ pregap duration differs
-   log 1 (cyanrip): 1.026
-   log 2 (EAC)    : 1.02
+✅ pregap duration matches
 ✅ EAC CRC32 matches
 Comparing tracks[7]
 ✅ track number matches
 ✅ start sector matches
 ✅ end sector matches
-✅ pregap duration matches
+❌ pregap duration differs
+   log 1 (cyanrip): 2.4
+   log 2 (EAC)    : 2.533
 ✅ EAC CRC32 matches
 Comparing tracks[8]
 ✅ track number matches
@@ -69,7 +75,7 @@ Comparing tracks[9]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 1.093
-   log 2 (EAC)    : 1.09
+   log 2 (EAC)    : 1.12
 ✅ EAC CRC32 matches
 Comparing tracks[10]
 ✅ track number matches
@@ -83,7 +89,7 @@ Comparing tracks[11]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 9.733
-   log 2 (EAC)    : 9.73
+   log 2 (EAC)    : 9.973
 ✅ EAC CRC32 matches
 Comparing tracks[12]
 ✅ track number matches
@@ -91,5 +97,5 @@ Comparing tracks[12]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): 1.733
-   log 2 (EAC)    : 1.73
+   log 2 (EAC)    : 1.973
 ✅ EAC CRC32 matches

@@ -41,7 +41,7 @@ Comparing tracks[4]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): None
-   log 2 (EAC)    : 0.04
+   log 2 (EAC)    : 0.053
 ✅ EAC CRC32 matches
 Comparing tracks[5]
 ✅ track number matches
@@ -57,7 +57,7 @@ Comparing tracks[6]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): None
-   log 2 (EAC)    : 0.74
+   log 2 (EAC)    : 0.986
 ✅ EAC CRC32 matches
 Comparing tracks[7]
 ✅ track number matches
@@ -81,5 +81,5 @@ Comparing tracks[9]
 ✅ end sector matches
 ❌ pregap duration differs
    log 1 (cyanrip): None
-   log 2 (EAC)    : 5.49
+   log 2 (EAC)    : 5.653
 ✅ EAC CRC32 matches
