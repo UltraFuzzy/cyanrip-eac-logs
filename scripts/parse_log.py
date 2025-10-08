@@ -1,4 +1,5 @@
 import re
+import math
 import codecs
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional
@@ -109,9 +110,10 @@ def parse_log_eac(file_path):
         if not re.match(r"\s+Pre-gap\s+length", lines[i]):
             track_pregap_duration = 0.0
         else:
-            ms = re.match(r"\s+Pre-gap\s+length\s+(\d+):(\d+):(\d+\.\d*)", lines[i])
-            track_pregap_duration = 3600*float(ms[1]) + 60*float(ms[2]) + float(ms[3])
-            # track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
+            ms = re.match(r"\s+Pre-gap\s+length\s+(\d+):(\d+):(\d+)\.(\d*)", lines[i])
+            # EAC reports duration in hh:mm:ss.ff
+            track_pregap_duration = 3600*float(ms[1]) + 60*float(ms[2]) + float(ms[3]) + float(ms[4])/75.0
+            track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
         while not re.match(r"\s+Peak\s+level", lines[i]):
             i += 1
         track_peak = re.match(r"\s+Peak\s+level\s+(\d+\.\d+)", lines[i])[1]
@@ -223,9 +225,9 @@ def parse_log_xld(file_path):
             track_pregap_duration = 0.0
         else:
             ms = re.match(r"\s+Pre-gap\s+length\s+:\s+(\d+):(\d+):(\d+)", lines[i])
-            # XLD reports duration in mm:ss with hundreths of seconds following last colon.
-            track_pregap_duration = 60*float(ms[1]) + float(ms[2]) + float(ms[3])/100.0
-            # track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
+            # XLD reports duration in mm:ss:ff
+            track_pregap_duration = 60*float(ms[1]) + float(ms[2]) + float(ms[3])/75.0
+            track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
         while not re.match(r"\s+Peak\s+:", lines[i]):
             i += 1
         track_peak = re.match(r"\s+Peak\s+:\s+(\d+\.\d+)", lines[i])[1]
@@ -303,7 +305,7 @@ def parse_log_cyanrip(file_path):
     if not lines[i].startswith("Drive used:"):
         drive = None
     else:
-        drive = re.match(r"Drive used:\s+(\S.*\S)\s+\(revision", lines[i])[1]
+        drive = re.match(r"Drive used:\s+(\S.*\S)", lines[i])[1]
 
     while not lines[i].startswith("Offset:"):
         i += 1
@@ -331,12 +333,13 @@ def parse_log_cyanrip(file_path):
 
         while not re.match(r"\s+Pregap\s+LSN:", lines[i]):
             i += 1
-        # cyanrip reports duration in hh:mm:ss with thousandths of seconds following decimal point
+        # cyanrip reports duration in hh:mm:ss.sss (thousandths of seconds following decimal point)
         if re.match(r"\s+Pregap\s+LSN:\s+none", lines[i]):
             track_pregap_duration = None
         else:
             ms = re.match(r"\s+Pregap\s+LSN:\s+-?\d+\s+\(duration:\s+([0-9]+):(\d+):(\d+\.\d*)\)", lines[i])
             track_pregap_duration = 3600*float(ms[1]) + 60*float(ms[2]) + float(ms[3])
+            track_pregap_duration = math.floor(1000*track_pregap_duration)/1000
 
         while not re.match(r"\s+Start\s+LSN:", lines[i]):
             i += 1

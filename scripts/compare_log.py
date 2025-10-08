@@ -72,7 +72,7 @@ def compare_logs(log1, log2):
     if log1.drive is None or log2.drive is None:
         print("🟡 WARNING: Can't determine if same drive used for rips.")
     elif (both_eac or neither_eac) and log1.drive != log2.drive:
-        print("🟡 WARNING: Different drives used for rips.")
+        print("🟡 WARNING: Possibly different drives used for rips.")
     # workaround for EAC quirk where log doesn't have a space between vendor and model strings
     elif one_eac:
         eac_log = log1 if log1.ripper == "EAC" else log2
@@ -80,7 +80,7 @@ def compare_logs(log1, log2):
         non_eac_drive = non_eac_log.drive
         possible_eac_drives = generate_single_space_insertions(eac_log.drive)
         if non_eac_drive not in possible_eac_drives:
-            print("🟡 WARNING: Different drives used for rips.")
+            print("🟡 WARNING: Possibly different drives used for rips.")
         else:
             print("✅ drive used matches")
     else:

@@ -78,6 +78,7 @@ skip_line_patterns = [
     # entries that don't need to match
     r"REM GENRE",
     r"REM DATE",
+    r"REM MEDIA",
 
     # EAC entries
     r"FLAGS DCP",
